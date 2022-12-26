@@ -23,14 +23,14 @@ int main() {
     char buff[80];
     int server = Socket(AF_INET, SOCK_STREAM, 0); //socket (ipv4, tcp, 0), return descriptor
     struct sockaddr_in adr = {0};
-    adr.sin_family = AF_INET; //семейство адресов
-    adr.sin_port = htons(34543); //семейство порт
+    adr.sin_family = AF_INET; //address family
+    adr.sin_port = htons(34543); //ports
     Bind(server, (struct sockaddr *) &adr, sizeof adr);
-    Listen(server, 1); //слушаем, до 1 клиента ожидаем
+    Listen(server, 1); //listen, wait 1 client
     socklen_t adrlen = sizeof adr;
-    int fd = Accept(server, (struct sockaddr *) &adr, &adrlen);
+    int fd = Accept(server, (struct sockaddr *) &adr, &adrlen); //accept connection
     char *ptyslavename;
-    read(fd, buff, sizeof(buff));
+    read(fd, buff, sizeof(buff)); //read ptyslavename from fd 
     char *mainslavename = ttyname(STDOUT_FILENO);
 
     printf("\nmain pty = %s\n", mainslavename);

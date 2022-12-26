@@ -46,7 +46,7 @@ int Accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen) {
 int Connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
     int res = connect(sockfd, addr, addrlen);
     check(res, "connect failed", EXIT_FAILURE);
-    return posix_openpt(O_RDWR);
+    return posix_openpt(O_RDWR); //open a pseudoterminal device
 }
 
 void Inet_pton(int af, const char *src, void *dst) {

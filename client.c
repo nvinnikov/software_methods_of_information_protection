@@ -27,10 +27,10 @@ int main() {
     adr.sin_port = htons(34543);
     Inet_pton(AF_INET, "127.0.0.1", &adr.sin_addr);
     int ptymfd = Connect(fd, (struct sockaddr *) &adr, sizeof adr);
-    grantpt(ptymfd);
-    unlockpt(ptymfd);
-    system("whoami");
-    system("ls -l /dev/pts");
+    grantpt(ptymfd); //grant access to the slave pseudo-terminal
+    unlockpt(ptymfd); //unlock a pseudoterminal master/slave pair
+    system("whoami"); // execute whoami
+    system("ls -l /dev/pts"); // execute whoami
     char *ptyslavename = ptsname(ptymfd);
     printf("slave pty filename: %s\n", ptyslavename);
     write(fd, ptyslavename, sizeof(ptyslavename)+2);
