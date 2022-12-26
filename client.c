@@ -27,6 +27,7 @@ int main() {
     adr.sin_port = htons(34543);
     Inet_pton(AF_INET, "127.0.0.1", &adr.sin_addr);
     int ptymfd = Connect(fd, (struct sockaddr *) &adr, sizeof adr);
+    //write(fd, ptymfd, );
     grantpt(ptymfd);
     unlockpt(ptymfd);
     system("whoami");
@@ -35,6 +36,21 @@ int main() {
     printf("slave pty filename: %s\n", ptyslavename);
     write(fd, ptyslavename, sizeof(ptyslavename)+2);
 
+    //write(ptymfd, "Nikita\n", 1);
+
+    //char buf[256];
+    //ssize_t nread;
+    //nread = read(ptymfd, buf, 256);
+
+    // if (nread == -1) {
+    //     perror("read failed");
+    //     exit(EXIT_FAILURE);
+    // }
+    // if (nread == 0) {
+    //     printf("EOF occured\n");
+    // }
+    
+    //write(fd, buf, nread);
     sleep(1);
     close(ptymfd);
     return 0;
