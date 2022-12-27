@@ -8,6 +8,10 @@ grantpt(ptymfd) - grant access to the slave pseudo-terminal
 unlockpt(ptymfd) - unlock a pseudoterminal master/slave pair
 posix_openpt(O_RDWR) - open a pseudoterminal device
 ```
+You should define _XOPEN_SOURCE before you include <ftw.h>
+```
+#define _XOPEN_SOURCE 600
+```
 # Build
 ## Run
 ```
